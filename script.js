@@ -144,4 +144,55 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Trigger initial animations
     setTimeout(animateOnScroll, 100);
+    
+    // Modal functionality for Privacy Policy and Terms of Service
+    const privacyPolicyLink = document.querySelector('.privacy-policy-link');
+    const termsOfServiceLink = document.querySelector('.terms-of-service-link');
+    const privacyPolicyModal = document.getElementById('privacy-policy-modal');
+    const termsOfServiceModal = document.getElementById('terms-of-service-modal');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    
+    // Open Privacy Policy modal
+    privacyPolicyLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        privacyPolicyModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+    
+    // Open Terms of Service modal
+    termsOfServiceLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        termsOfServiceModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+    
+    // Close modals when clicking the close button
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            privacyPolicyModal.classList.remove('active');
+            termsOfServiceModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        });
+    });
+    
+    // Close modals when clicking outside the modal content
+    window.addEventListener('click', function(e) {
+        if (e.target === privacyPolicyModal) {
+            privacyPolicyModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+        if (e.target === termsOfServiceModal) {
+            termsOfServiceModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    });
+    
+    // Close modals with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            privacyPolicyModal.classList.remove('active');
+            termsOfServiceModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+    });
 });
